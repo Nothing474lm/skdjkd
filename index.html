@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Codex: Tu Protocolo de Entrenamiento en 6 Meses</title>
+  
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Fuentes: Playfair Display (Serif) & Roboto Mono (Monospace) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- React y Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <style>
+    body { font-family: 'Roboto Mono', monospace; background-color: #0d1117; color: #c9d1d9; }
+    h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+    .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    .highlight { color: #58a6ff; }
+    .checkbox-custom:checked + .checkbox-label .checkbox-box {
+        background-color: #58a6ff;
+        border-color: #58a6ff;
+    }
+    .checkbox-custom:checked + .checkbox-label .checkbox-text {
+        text-decoration: line-through;
+        color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // =============== DATOS DEL PLAN DE APRENDIZAJE ===============
+    const learningPlan = [
+      {
+        month: 1,
+        title: "FUNDAMENTOS TEORICOS Y PRIMEROS PASOS",
+        weeks: [
+          {
+            id: "m1w1",
+            title: "Semana 1-2: Teoria del Diseño",
+            priority: "Comprender los principios basicos",
+            activities: [
+              "Estudiar teoria del color: Circulo cromatico, armonias, psicologia del color.",
+              "Aprender tipografia basica: Anatomia, clasificacion, legibilidad.",
+              "Dominar principios de composicion: Regla de tercios, jerarquia visual, equilibrio.",
+              "Aplicar leyes de la Gestalt: Proximidad, similitud, continuidad, cierre.",
+              "Crear 5 paletas de color diferentes para distintos conceptos.",
+              "Analizar 10 diseños existentes identificando principios aplicados."
+            ],
+            proTip: "Crea un 'swipe file' en Pinterest o una carpeta local. No solo guardes imagenes que te gusten, añade una nota explicando POR QUE te gustan. ¿Es la composicion? ¿El color? Este analisis activo acelera el aprendizaje x10.",
+            resources: [
+              { type: 'book', text: "Libro: 'Los elementos del estilo tipografico' - Robert Bringhurst" },
+              { type: 'monitor-play', text: "Curso online: 'Graphic Design Basics' en Coursera" },
+              { type: 'youtube', text: "Canal YouTube: 'The Futur' para fundamentos" }
+            ]
+          },
+          {
+            id: "m1w2",
+            title: "Semana 3-4: Herramientas Basicas",
+            priority: "Dominio de Adobe Illustrator y Photoshop",
+            activities: [
+              "Dominar herramientas basicas de Illustrator: seleccion, pluma, formas, texto.",
+              "Practicar trabajo con capas y organizacion en Illustrator.",
+              "Crear un set de 10 iconos simples en Illustrator.",
+              "Dominar herramientas de seleccion y retoque en Photoshop.",
+              "Aprender el uso de capas y mascaras en Photoshop.",
+              "Realizar una manipulacion basica de imagenes en Photoshop."
+            ],
+            proTip: "Enfocate en dominar la herramienta Pluma de Illustrator desde el principio. Es la mas dificil pero la mas poderosa. Dedica 30 minutos al dia a trazar formas complejas. Busca 'Pen Tool Game' en Google para practicar de forma divertida.",
+            project: "Crear 3 logotipos simples para empresas ficticias."
+          }
+        ]
+      },
+      {
+        month: 2,
+        title: "IDENTIDAD VISUAL Y BRANDING",
+        weeks: [
+          {
+            id: "m2w1",
+            title: "Semana 5-6: Diseño de Logotipos",
+            priority: "Proceso creativo y desarrollo conceptual",
+            activities: [
+              "Aprender a crear un briefing y realizar research de competencia.",
+              "Practicar sketching: 50 bocetos diarios a mano.",
+              "Digitalizar los 5 mejores conceptos de logo.",
+              "Seleccionar y personalizar tipografia corporativa para un proyecto.",
+              "Crear un moodboard completo para un cliente ficticio."
+            ],
+            proTip: "No te enamores de tu primer boceto. La regla de los 50 bocetos te obliga a explorar mas alla de las ideas obvias. La mayoria seran malos, pero las gemas se esconden en la cantidad. La creatividad es un musculo.",
+            project: "Comenzar con contactos que necesiten logos para aplicar en proyectos reales."
+          },
+          {
+            id: "m2w2",
+            title: "Semana 7-8: Sistemas de Identidad",
+            priority: "Del logo a la marca completa",
+            activities: [
+              "Desarrollar un manual de identidad basico de 10 paginas.",
+              "Diseñar papeleria corporativa: tarjetas, hojas membretadas y sobres.",
+              "Crear aplicaciones digitales: avatares y banners para redes sociales.",
+              "Presentar un proyecto completo usando mockups profesionales."
+            ],
+            proTip: "Piensa en un sistema, no en piezas aisladas. Antes de disenar la tarjeta de visita, define la reticula y la jerarquia tipografica que usaras en TODAS las piezas. Esto asegura la coherencia y te ahorra tiempo.",
+            tools: "Introduccion a Adobe InDesign para manuales y papeleria."
+          }
+        ]
+      },
+       {
+        month: 3,
+        title: "DISEÑO EDITORIAL Y COMPOSICION",
+        weeks: [
+          {
+            id: "m3w1",
+            title: "Semana 9-10: Maquetacion Editorial",
+            priority: "Dominio de Adobe InDesign",
+            activities: [
+              "Estudiar y aplicar reticulas y sistemas de maquetacion.",
+              "Dominar estilos de parrafo y caracter para eficiencia.",
+              "Utilizar paginas maestras para consistencia en documentos largos.",
+              "Disenar una revista de 8 paginas sobre un tema de interes.",
+              "Crear un folleto triptico promocional.",
+              "Disenar un cartel puramente tipografico."
+            ],
+            proTip: "Activa siempre la reticula base (baseline grid) en InDesign. Alinear el texto a esta reticula invisible es el secreto para que tus layouts se vean limpios y profesionales, incluso si no sabes por que.",
+            project: "Completar los 3 proyectos editoriales."
+          },
+          {
+            id: "m3w2",
+            title: "Semana 11-12: Diseño Web Basico (UI/UX)",
+            priority: "Fundamentos de la experiencia de usuario",
+            activities: [
+              "Aprender a disenar con grids responsivos (movil, tablet, desktop).",
+              "Aplicar la metodologia de diseño mobile-first.",
+              "Disenar un set de iconografia web consistente.",
+              "Crear un prototipo basico interactivo de 3 pantallas."
+            ],
+            proTip: "No reinventes la rueda. Usa un UI Kit gratuito de la comunidad de Figma para empezar. Esto te permite concentrarte en el layout y la experiencia de usuario sin perder tiempo disenando cada boton desde cero.",
+            tools: "Introduccion a Figma o Adobe XD."
+          }
+        ]
+      },
+      {
+        month: 4,
+        title: "ESPECIALIZACION Y PROYECTOS COMPLEJOS",
+        weeks: [
+          {
+            id: "m4w1",
+            title: "Semana 13-14: Packaging y Aplicaciones 3D",
+            priority: "Nuevas dimensiones del diseño",
+            activities: [
+              "Aprender a desarrollar troqueles (dielines) para packaging.",
+              "Disenar el packaging para un producto ficticio (ej. una caja de cafe).",
+              "Crear mockups 3D fotorrealistas del packaging.",
+              "Estudiar consideraciones tecnicas de impresion (CMYK, tintas Pantone, acabados)."
+            ],
+            proTip: "Imprime y monta tus disenos de packaging en papel. Sostener un prototipo fisico revela problemas de escala, legibilidad y estructura que son imposibles de ver en una pantalla.",
+            tools: "Introduccion a Adobe Dimension o Blender basico para renders."
+          },
+          {
+            id: "m4w2",
+            title: "Semana 15-16: Diseño Digital Avanzado",
+            priority: "Redes sociales y marketing digital",
+            activities: [
+              "Disenar una campaña cohesiva para redes sociales (3 posts, 2 stories).",
+              "Crear un set de banners publicitarios en diferentes tamanos.",
+              "Disenar una plantilla de email marketing en Figma.",
+              "Crear una animacion basica de un logo en After Effects."
+            ],
+            proTip: "Aplica la 'regla de los 3 segundos'. El 80% de tu mensaje debe entenderse en los primeros 3 segundos de ver tu diseno o animacion. Prioriza un visual impactante y un titular claro.",
+            tools: "Introduccion a animaciones basicas en Adobe After Effects."
+          }
+        ]
+      },
+      {
+        month: 5,
+        title: "DESARROLLO DE PORTAFOLIO Y NETWORKING",
+        weeks: [
+          {
+            id: "m5w1",
+            title: "Semana 17-18: Construccion del Portafolio",
+            priority: "Presentacion profesional del trabajo",
+            activities: [
+              "Escribir un caso de estudio detallado para tu mejor proyecto.",
+              "Seleccionar y pulir entre 8-10 proyectos para mostrar.",
+              "Crear mockups de alta calidad para cada proyecto.",
+              "Configurar y disenar tu perfil de Behance."
+            ],
+            proTip: "Escribe tus casos de estudio en un documento de texto primero, sin preocuparte por el diseno. Enfocate en la historia: el problema, el proceso, la solucion y los resultados. Un buen texto es la base de un buen caso de estudio.",
+            tools: "Configuracion de perfil en Behance (principal) y Dribbble."
+          },
+          {
+            id: "m5w2",
+            title: "Semana 19-20: Networking y Primeros Clientes",
+            priority: "Desarrollo de habilidades comerciales",
+            activities: [
+              "Practicar la presentacion oral de tus proyectos.",
+              "Investigar y desarrollar una estructura de tarifas y presupuestos.",
+              "Crear una plantilla de propuesta comercial profesional.",
+              "Definir y documentar tu workflow de trabajo con clientes.",
+              "Participar activamente en una comunidad de diseno online."
+            ],
+            proTip: "No preguntes '¿tienes trabajo para mi?'. Pregunta '¿cual es el mayor desafio que tienes ahora mismo?'. Escucha sus problemas. Asi te posicionas como un solucionador, no como un vendedor.",
+          }
+        ]
+      },
+      {
+        month: 6,
+        title: "PERFECCIONAMIENTO Y PREPARACION PROFESIONAL",
+        weeks: [
+          {
+            id: "m6w1",
+            title: "Semana 21-22: Perfeccionamiento Tecnico",
+            priority: "Llevar las habilidades al siguiente nivel",
+            activities: [
+              "Realizar un tutorial de tecnicas avanzadas de ilustracion vectorial.",
+              "Completar un proyecto de manipulacion fotografica compleja.",
+              "Analizar y deconstruir un sistema de identidad complejo (ej. el de una aerolinea).",
+              "Estudiar los fundamentos de los Sistemas de Diseño (Design Systems) en Figma."
+            ],
+            proTip: "Elige a un disenador que admires. Toma uno de sus trabajos y trata de recrearlo pixel por pixel. No es para copiar, es para deconstruir su proceso y entender sus decisiones tecnicas. Es uno de los ejercicios de aprendizaje mas potentes."
+          },
+          {
+            id: "m6w2",
+            title: "Semana 23-24: Preparacion Profesional",
+            priority: "Transicion hacia el mercado laboral",
+            activities: [
+              "Realizar una revision final y pulido de todo el portafolio.",
+              "Actualizar tu perfil de LinkedIn y CV.",
+              "Buscar activamente oportunidades (freelance o empleo).",
+              "Preparar y simular una entrevista de trabajo.",
+              "Establecer un plan de aprendizaje continuo para despues de los 6 meses."
+            ],
+            proTip: "Prepara 3 preguntas inteligentes para el final de cada entrevista. Preguntas como '¿Como se ve el exito en este rol en los primeros 90 dias?' o '¿Cual es el mayor desafio que enfrenta el equipo de diseno ahora mismo?' demuestran que piensas estrategicamente.",
+            project: "Objetivos finales: Portafolio completo, 3+ proyectos reales, red de contactos establecida y comprension clara del mercado y tarifas."
+          }
+        ]
+      }
+    ];
+
+    // =============== COMPONENTES ===============
+    const ActivityChecklist = ({ activities, weekId }) => {
+        const [checkedItems, setCheckedItems] = useState(() => {
+            try {
+                const saved = localStorage.getItem(`progress_${weekId}`);
+                return saved ? JSON.parse(saved) : {};
+            } catch (error) {
+                return {};
+            }
+        });
+
+        const handleCheck = (activity) => {
+            const newCheckedItems = { ...checkedItems, [activity]: !checkedItems[activity] };
+            setCheckedItems(newCheckedItems);
+            localStorage.setItem(`progress_${weekId}`, JSON.stringify(newCheckedItems));
+        };
+
+        return (
+            <ul className="space-y-3 text-gray-400">
+                {activities.map((activity, i) => (
+                    <li key={i}>
+                        <input 
+                            type="checkbox" 
+                            id={`${weekId}_${i}`} 
+                            className="hidden checkbox-custom"
+                            checked={!!checkedItems[activity]}
+                            onChange={() => handleCheck(activity)}
+                        />
+                        <label htmlFor={`${weekId}_${i}`} className="flex items-center cursor-pointer checkbox-label">
+                            <span className="w-4 h-4 mr-3 border-2 border-gray-600 rounded-sm flex-shrink-0 flex items-center justify-center checkbox-box transition-all">
+                                {checkedItems[activity] && <i data-lucide="check" className="w-3 h-3 text-black"></i>}
+                            </span>
+                            <span className="checkbox-text transition-colors">{activity}</span>
+                        </label>
+                    </li>
+                ))}
+            </ul>
+        );
+    };
+
+    const App = () => {
+      const [activeMonth, setActiveMonth] = useState(1);
+
+      useEffect(() => {
+        lucide.createIcons();
+      }, [activeMonth]);
+
+      const currentMonthData = learningPlan.find(m => m.month === activeMonth);
+
+      return (
+        <div className="min-h-screen bg-[#010409]">
+          <header className="fixed w-full top-0 bg-[#0d1117]/80 backdrop-blur-lg border-b border-gray-800 z-30">
+            <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+              <h1 className="text-2xl font-bold font-serif text-gray-100">Design Codex</h1>
+               <div className="hidden md:flex items-center space-x-6">
+                    <a href="#plan" className="text-sm font-medium text-gray-400 hover:text-white">Plan de 6 Meses</a>
+                    <a href="#rutina" className="text-sm font-medium text-gray-400 hover:text-white">Rutina y Recursos</a>
+                    <a href="#operaciones" className="text-sm font-medium text-gray-400 hover:text-white">Operaciones</a>
+               </div>
+            </nav>
+          </header>
+
+          <main className="pt-24">
+            <section id="plan" className="py-20 px-6">
+              <div className="max-w-7xl mx-auto">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4 text-gray-100">Protocolo de Entrenamiento en 6 Meses</h2>
+                    <p className="text-lg text-gray-400">Un sistema intensivo para desarrollar habilidades de diseño grafico de nivel profesional, desde cero.</p>
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-10 lg:gap-16">
+                  {/* Navegación de Meses */}
+                  <div className="md:w-1/3">
+                    <div className="space-y-3 sticky top-24">
+                      {learningPlan.map((month) => (
+                        <button 
+                          key={month.month} 
+                          onClick={() => setActiveMonth(month.month)}
+                          className={`w-full p-4 border rounded-lg transition-all duration-300 text-left flex items-start gap-4 ${ activeMonth === month.month ? 'bg-[#58a6ff]/10 text-white border-[#58a6ff]/50' : 'bg-[#161b22] border-gray-800 text-gray-400 hover:border-gray-600'}`}
+                        >
+                          <span className={`font-bold font-serif text-2xl highlight`}>M{month.month}</span>
+                          <div>
+                            <span className="font-semibold text-sm uppercase tracking-wider">{month.title}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Contenido del Mes */}
+                  <div className="md:w-2/3">
+                    <div className="bg-[#161b22] p-8 rounded-xl border border-gray-800 fade-in">
+                        <h3 className="text-3xl font-bold font-serif mb-6 text-gray-100">Mes {currentMonthData.month}: <span className="highlight">{currentMonthData.title}</span></h3>
+                        
+                        {currentMonthData.weeks.map((week, index) => (
+                            <div key={index} className="mb-8 pb-8 border-b border-gray-800 last:border-b-0">
+                                <h4 className="text-xl font-bold font-serif mb-4 text-gray-300">{week.title}</h4>
+                                <div className="space-y-6 text-sm">
+                                    <div>
+                                        <strong className="block font-semibold mb-2 highlight">Prioridad:</strong>
+                                        <p className="text-gray-400 bg-gray-800 border-l-4 border-yellow-400 p-3 rounded-r-lg">{week.priority}</p>
+                                    </div>
+                                    <div>
+                                        <strong className="block font-semibold mb-2 highlight">Actividades:</strong>
+                                        <ActivityChecklist activities={week.activities} weekId={week.id} />
+                                    </div>
+                                    {week.proTip && (
+                                        <div className="bg-blue-900/20 border border-blue-800 text-blue-300 p-4 rounded-lg">
+                                            <strong className="flex items-center gap-2"><i data-lucide="lightbulb" className="w-4 h-4"></i>Consejo Profesional:</strong>
+                                            <p className="mt-2 text-sm">{week.proTip}</p>
+                                        </div>
+                                    )}
+                                    {week.resources && (
+                                        <div>
+                                            <strong className="block font-semibold mb-2 highlight">Recursos:</strong>
+                                            <div className="space-y-2">
+                                                {week.resources.map((res, i) => (
+                                                    <div key={i} className="flex items-center gap-3 text-gray-400">
+                                                        <i data-lucide={res.type} className="w-4 h-4 flex-shrink-0 highlight"></i>
+                                                        <span>{res.text}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {week.tools && (
+                                        <div>
+                                            <strong className="block font-semibold mb-2 highlight">Nuevas Herramientas:</strong>
+                                            <p className="text-gray-400">{week.tools}</p>
+                                        </div>
+                                    )}
+                                    {week.project && (
+                                        <div>
+                                            <strong className="block font-semibold mb-2 highlight">Proyecto Clave:</strong>
+                                            <p className="text-gray-400">{week.project}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            <section id="rutina" className="py-20 px-6 bg-[#010409] border-y border-gray-800">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-4xl font-bold font-serif mb-4 text-gray-100">Estructura y Recursos del Sistema</h2>
+                        <p className="text-lg text-gray-400">La consistencia es el algoritmo del exito. Sigue esta rutina y aprovecha estos recursos para maximizar tu progreso.</p>
+                    </div>
+                    <div className="grid lg:grid-cols-2 gap-16">
+                        <div>
+                            <h3 className="text-2xl font-bold font-serif mb-6 highlight">Rutina Diaria Recomendada (4-5 Horas)</h3>
+                            <ul className="space-y-4 text-gray-400 border-l-2 border-gray-800 pl-6">
+                                <li><strong>30 min:</strong> Revision de referencias e inspiracion (Behance, Dribbble).</li>
+                                <li><strong>2 horas:</strong> Trabajo practico enfocado en los proyectos del mes.</li>
+                                <li><strong>1 hora:</strong> Estudio teorico o tutoriales especificos.</li>
+                                <li><strong>1 hora:</strong> Practica libre y experimentacion sin objetivos.</li>
+                                <li><strong>30 min:</strong> Documentacion y organizacion del trabajo del dia.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="text-2xl font-bold font-serif mb-6 highlight">Recursos Esenciales</h3>
+                             <div className="space-y-4 text-gray-400">
+                                <p><strong>Libros:</strong> "Logo Design Love", "Thinking with Type", "Grid Systems".</p>
+                                <p><strong>Cursos:</strong> Domestika, Skillshare, LinkedIn Learning.</p>
+                                <p><strong>YouTube:</strong> The Futur, Satori Graphics, Spoon Graphics.</p>
+                                <p><strong>Comunidades:</strong> Behance, Dribbble, Awwwards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <section id="portfolio" className="py-20 px-6">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold font-serif mb-4 text-gray-100">Estrategia de Portafolio</h2>
+                        <p className="text-lg text-gray-400">Tu portafolio es tu producto mas importante. Construyelo con intencion.</p>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="p-6 bg-[#161b22] border border-gray-800 rounded-lg"><h4 className="font-semibold text-lg mb-2 highlight">Proyecto Estrella</h4><p className="text-sm text-gray-400">Un caso de estudio de una identidad visual completa, mostrando todo tu proceso estrategico.</p></div>
+                        <div className="p-6 bg-[#161b22] border border-gray-800 rounded-lg"><h4 className="font-semibold text-lg mb-2">Diversidad</h4><p className="text-sm text-gray-400">Incluye 8-10 proyectos que demuestren tu versatilidad: editorial, packaging, web/app, ilustracion, etc.</p></div>
+                        <div className="p-6 bg-[#161b22] border border-gray-800 rounded-lg"><h4 className="font-semibold text-lg mb-2">Storytelling</h4><p className="text-sm text-gray-400">Cada proyecto debe contar una historia: el problema, el proceso, la solucion y, si es posible, los resultados.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="mindset" className="py-20 px-6 bg-[#010409] border-y border-gray-800">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold font-serif mb-4 text-gray-100">Mindset y Errores a Evitar</h2>
+                        <p className="text-lg text-gray-400">La tecnica se aprende, pero la mentalidad correcta es lo que te hara un profesional.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 className="text-xl font-bold font-serif mb-4 text-green-400">Consejos Clave para el Exito</h4>
+                            <ul className="space-y-3 text-gray-400">
+                                <li className="flex items-start"><i data-lucide="repeat" className="w-4 h-4 mr-3 mt-1 text-green-400"></i><span><strong>Practica Constante:</strong> Diseña algo todos los dias, aunque sea pequeño.</span></li>
+                                <li className="flex items-start"><i data-lucide="message-square" className="w-4 h-4 mr-3 mt-1 text-green-400"></i><span><strong>Busca Feedback:</strong> Pide opiniones constructivas y aprende a no tomarlo como algo personal.</span></li>
+                                <li className="flex items-start"><i data-lucide="eye" className="w-4 h-4 mr-3 mt-1 text-green-400"></i><span><strong>Observacion Activa:</strong> Analiza el diseño en todo lo que te rodea.</span></li>
+                                <li className="flex items-start"><i data-lucide="hourglass" className="w-4 h-4 mr-3 mt-1 text-green-400"></i><span><strong>Paciencia:</strong> El progreso es un maraton, no un sprint.</span></li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h4 className="text-xl font-bold font-serif mb-4 text-red-400">Errores Comunes a Evitar</h4>
+                            <ul className="space-y-3 text-gray-400">
+                                <li className="flex items-start"><i data-lucide="skip-forward" className="w-4 h-4 mr-3 mt-1 text-red-400"></i><span><strong>Saltarse los Fundamentos:</strong> La teoria es la base que sostiene toda tu habilidad tecnica.</span></li>
+                                <li className="flex items-start"><i data-lucide="mouse-pointer" className="w-4 h-4 mr-3 mt-1 text-red-400"></i><span><strong>Enamorarse del Software:</strong> Las herramientas cambian, los conceptos de diseño son eternos.</span></li>
+                                <li className="flex items-start"><i data-lucide="folder-x" className="w-4 h-4 mr-3 mt-1 text-red-400"></i><span><strong>No Documentar el Proceso:</strong> Si no puedes explicar por que tomaste una decision, es como si no hubiera ocurrido.</span></li>
+                                <li className="flex items-start"><i data-lucide="user-x" className="w-4 h-4 mr-3 mt-1 text-red-400"></i><span><strong>Trabajar Aislado:</strong> El diseño se enriquece con la colaboracion y el feedback externo.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="operaciones" className="py-20 px-6">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold font-serif mb-4 text-gray-100">Operaciones de Diseño: Del Freelance al Estudio</h2>
+                        <p className="text-lg text-gray-400">Convertir tu habilidad en un negocio sostenible. El ultimo paso para ser un profesional completo.</p>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="p-6 bg-[#161b22] border border-gray-800 rounded-lg"><h4 className="font-semibold text-lg mb-2 highlight">Fijacion de Precios (Pricing)</h4><p className="text-sm text-gray-400">Aprende los 3 modelos principales: por hora (bueno para empezar), por proyecto (ideal para alcances definidos) y por valor (el objetivo final, donde cobras por el impacto en el negocio del cliente, no por tu tiempo).</p></div>
+                        <div className="p-6 bg-[#161b22] border border-gray-800 rounded-lg"><h4 className="font-semibold text-lg mb-2 highlight">Propuestas y Contratos</h4><p className="text-sm text-gray-400">Una propuesta no es un presupuesto. Debe re-establecer el problema del cliente, presentar tu solucion, detallar el proceso y el alcance, y ofrecer 2-3 opciones de inversion. Un contrato claro te protege a ti y al cliente.</p></div>
+                        <div className="p-6 bg-[#161b22] border border-gray-800 rounded-lg"><h4 className="font-semibold text-lg mb-2 highlight">Gestion de Proyectos</h4><p className="text-sm text-gray-400">Usa herramientas como Trello o Asana para organizar tus tareas, establecer hitos y mantener al cliente informado. La comunicacion proactiva sobre el avance del proyecto genera confianza y evita malentendidos.</p></div>
+                    </div>
+                </div>
+            </section>
+
+          </main>
+
+          <footer className="bg-[#010409] py-12 px-6 border-t border-gray-800 mt-20">
+            <div className="max-w-7xl mx-auto text-center">
+              <h4 className="text-2xl font-bold font-serif mb-2 text-gray-100">Design Codex</h4>
+              <p className="text-gray-500 text-sm">Tu futuro profesional empieza hoy.</p>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    // =============== RENDERIZAR LA APP ===============
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
